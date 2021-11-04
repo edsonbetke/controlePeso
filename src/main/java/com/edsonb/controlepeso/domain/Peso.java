@@ -3,6 +3,7 @@ package com.edsonb.controlepeso.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Entity
 public class Peso implements Serializable {
 	private static final long serialVersionUID = 1L;
 

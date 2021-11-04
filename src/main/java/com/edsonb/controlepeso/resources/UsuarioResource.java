@@ -7,20 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edsonb.controlepeso.domain.Peso;
-import com.edsonb.controlepeso.services.PesoService;
+import com.edsonb.controlepeso.domain.Usuario;
+import com.edsonb.controlepeso.services.UsuarioService;
 
 @RestController
-@RequestMapping(value = "/pesos")
-public class PesoResource {
+@RequestMapping(value = "/usuarios")
+public class UsuarioResource {
 
 	@Autowired
-	private PesoService service;
+	private UsuarioService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Peso obj = service.find(id);
-
+	public ResponseEntity<?> find(@PathVariable Integer id) throws Exception {
+		Usuario obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }
