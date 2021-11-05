@@ -35,13 +35,14 @@ public class Peso implements Serializable {
 
 	}
 
-	public Peso(Integer id, Date data, Double peso, Double imc, Double variacao) {
+	public Peso(Integer id, Date data, Double peso, Double imc, Double variacao, Usuario usuario) {
 		super();
 		this.id = id;
 		this.data = data;
 		this.peso = peso;
 		this.imc = imc;
 		this.variacao = variacao;
+		this.usuario = usuario;
 	}
 
 	public Integer getId() {

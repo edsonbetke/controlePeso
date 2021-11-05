@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.edsonb.controlepeso.domain.Peso;
 import com.edsonb.controlepeso.repositories.PesoRepository;
+import com.edsonb.controlepeso.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PesoService {
@@ -16,6 +17,7 @@ public class PesoService {
 
 	public Peso find(Integer id) {
 		Optional<Peso> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado!! Id: " + id + ", Tipo: " + Peso.class.getName()));
 	}
 }
