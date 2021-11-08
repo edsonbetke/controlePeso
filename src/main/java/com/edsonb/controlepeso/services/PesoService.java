@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.edsonb.controlepeso.domain.Peso;
 import com.edsonb.controlepeso.repositories.PesoRepository;
+import com.edsonb.controlepeso.services.exceptions.DataIntegrityException;
 import com.edsonb.controlepeso.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -24,5 +25,19 @@ public class PesoService {
 	public Peso insert(Peso obj) {
 		obj.setId(null);
 		return repo.save(obj);
+	}
+
+	public Peso update(Peso obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
+
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityException e) {
+			throw new DataIntegrityException("Não é possível excluir um peso");
+		}
 	}
 }
