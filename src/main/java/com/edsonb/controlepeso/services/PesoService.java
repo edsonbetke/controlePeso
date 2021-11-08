@@ -20,4 +20,9 @@ public class PesoService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado!! Id: " + id + ", Tipo: " + Peso.class.getName()));
 	}
+
+	public Peso insert(Peso obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }
