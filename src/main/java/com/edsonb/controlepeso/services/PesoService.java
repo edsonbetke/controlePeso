@@ -1,5 +1,6 @@
 package com.edsonb.controlepeso.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,9 @@ public class PesoService {
 		} catch (DataIntegrityException e) {
 			throw new DataIntegrityException("Não é possível excluir um peso");
 		}
+	}
+
+	public List<Peso> findAll() {
+		return repo.findAll();
 	}
 }
