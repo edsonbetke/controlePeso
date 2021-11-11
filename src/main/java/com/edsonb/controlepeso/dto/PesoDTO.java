@@ -2,12 +2,16 @@ package com.edsonb.controlepeso.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.edsonb.controlepeso.domain.Peso;
 
 public class PesoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private Double peso;
 
 	public PesoDTO() {

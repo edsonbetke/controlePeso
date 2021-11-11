@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.edsonb.controlepeso.domain.Peso;
+import com.edsonb.controlepeso.dto.PesoDTO;
 import com.edsonb.controlepeso.repositories.PesoRepository;
 import com.edsonb.controlepeso.services.exceptions.DataIntegrityException;
 import com.edsonb.controlepeso.services.exceptions.ObjectNotFoundException;
@@ -53,5 +54,9 @@ public class PesoService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 
 		return repo.findAll(pageRequest);
+	}
+
+	public Peso fromDTO(PesoDTO objDto) {
+		return new Peso(objDto.getId(), null, objDto.getPeso(), null, null, null);
 	}
 }
