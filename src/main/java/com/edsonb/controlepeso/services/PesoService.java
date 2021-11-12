@@ -33,8 +33,9 @@ public class PesoService {
 	}
 
 	public Peso update(Peso obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Peso newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 
 	public void delete(Integer id) {
@@ -58,5 +59,9 @@ public class PesoService {
 
 	public Peso fromDTO(PesoDTO objDto) {
 		return new Peso(objDto.getId(), null, objDto.getPeso(), null, null, null);
+	}
+
+	private void updateData(Peso newObj, Peso obj) {
+		newObj.setPeso(obj.getPeso());
 	}
 }
