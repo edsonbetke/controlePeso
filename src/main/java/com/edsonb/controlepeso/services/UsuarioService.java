@@ -3,6 +3,8 @@ package com.edsonb.controlepeso.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,9 +28,11 @@ public class UsuarioService {
 				"Objeto não encontrado!! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 
+	@Transactional
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
-		return repo.save(obj);
+		obj = repo.save(obj);
+		return obj;
 	}
 
 	public Usuario update(Usuario obj) {

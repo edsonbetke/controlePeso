@@ -8,7 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.edsonb.controlepeso.domain.Usuario;
+import com.edsonb.controlepeso.services.validation.UsuarioUpdate;
 
+@UsuarioUpdate
 public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
