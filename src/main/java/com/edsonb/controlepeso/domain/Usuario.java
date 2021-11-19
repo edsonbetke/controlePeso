@@ -1,8 +1,11 @@
 package com.edsonb.controlepeso.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -129,6 +132,22 @@ public class Usuario implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+//		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append("Prezado ");
+		builder.append(getNome());
+		builder.append(" foi criado o seu usuário/email ");
+		builder.append(getEmail());
+		builder.append(", sua senha é: ");
+		builder.append(getSenha());
+		builder.append(".");
+		return builder.toString();
 	}
 
 }

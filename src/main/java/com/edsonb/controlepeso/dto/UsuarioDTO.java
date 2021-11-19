@@ -25,6 +25,9 @@ public class UsuarioDTO implements Serializable {
 	private String email;
 
 	@NotEmpty(message = "Preenchimento obrigatório")
+	private String senha;
+
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private Double altura;
 
 	private Integer idade;
@@ -79,6 +82,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setIdade(Integer idade) {
 		this.idade = idade;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

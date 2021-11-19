@@ -22,6 +22,9 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repo;
 
+	@Autowired
+	private EmailService emailService;
+
 	public Usuario find(Integer id) {
 		Optional<Usuario> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -32,6 +35,7 @@ public class UsuarioService {
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
 		obj = repo.save(obj);
+		emailService.sendCriationUserEmail(obj);
 		return obj;
 	}
 
@@ -56,7 +60,7 @@ public class UsuarioService {
 	}
 
 	public Usuario fromDTO(UsuarioDTO objDto) {
-		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, objDto.getAltura(),
+		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail(), objDto.getSenha(), objDto.getAltura(),
 				objDto.getIdade());
 	}
 
