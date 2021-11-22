@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.edsonb.controlepeso.domain.Usuario;
-import com.edsonb.controlepeso.dto.UsuarioDTO;
+import com.edsonb.controlepeso.dto.UsuarioNewDTO;
 import com.edsonb.controlepeso.repositories.UsuarioRepository;
 import com.edsonb.controlepeso.services.exceptions.ObjectNotFoundException;
 
@@ -59,9 +59,11 @@ public class UsuarioService {
 		return repo.findAll(pageRequest);
 	}
 
-	public Usuario fromDTO(UsuarioDTO objDto) {
-		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail(), objDto.getSenha(), objDto.getAltura(),
+	public Usuario fromDTO(UsuarioNewDTO objDto) {
+		Usuario usuario = new Usuario(null, objDto.getNome(), objDto.getEmail(), objDto.getSenha(), objDto.getAltura(),
 				objDto.getIdade());
+
+		return usuario;
 	}
 
 	private void updateData(Usuario newObj, Usuario obj) {

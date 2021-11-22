@@ -24,14 +24,6 @@ public class UsuarioDTO implements Serializable {
 	@Email(message = "Email inválido")
 	private String email;
 
-	@NotEmpty(message = "Preenchimento obrigatório")
-	private String senha;
-
-	@NotEmpty(message = "Preenchimento obrigatório")
-	private Double altura;
-
-	private Integer idade;
-
 	public UsuarioDTO() {
 
 	}
@@ -40,8 +32,7 @@ public class UsuarioDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		email = obj.getEmail();
-		altura = obj.getAltura();
-		idade = obj.getIdade();
+
 	}
 
 	public Integer getId() {
@@ -66,30 +57,6 @@ public class UsuarioDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Double getAltura() {
-		return altura;
-	}
-
-	public void setAltura(Double altura) {
-		this.altura = altura;
-	}
-
-	public Integer getIdade() {
-		return idade;
-	}
-
-	public void setIdade(Integer idade) {
-		this.idade = idade;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 }

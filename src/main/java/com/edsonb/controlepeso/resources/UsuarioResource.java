@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.edsonb.controlepeso.domain.Usuario;
 import com.edsonb.controlepeso.dto.UsuarioDTO;
+import com.edsonb.controlepeso.dto.UsuarioNewDTO;
 import com.edsonb.controlepeso.services.UsuarioService;
 
 @RestController
@@ -33,7 +36,8 @@ public class UsuarioResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Usuario obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioNewDTO objDto) {
+		Usuario obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
