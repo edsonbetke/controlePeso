@@ -35,7 +35,7 @@ public class UsuarioService {
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
 		obj = repo.save(obj);
-		emailService.sendCriationUserEmail(obj);
+		emailService.sendCriationUserHtmlEmail(obj);
 		return obj;
 	}
 
