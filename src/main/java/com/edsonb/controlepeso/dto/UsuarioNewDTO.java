@@ -2,11 +2,15 @@ package com.edsonb.controlepeso.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 public class UsuarioNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String nome;
 	private String email;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String senha;
 
 	private Double altura;

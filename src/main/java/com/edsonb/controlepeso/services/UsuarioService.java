@@ -9,15 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.edsonb.controlepeso.domain.Usuario;
+import com.edsonb.controlepeso.dto.UsuarioDTO;
 import com.edsonb.controlepeso.dto.UsuarioNewDTO;
 import com.edsonb.controlepeso.repositories.UsuarioRepository;
 import com.edsonb.controlepeso.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UsuarioService {
+
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	@Autowired
 	private UsuarioRepository repo;
@@ -35,7 +40,7 @@ public class UsuarioService {
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
 		obj = repo.save(obj);
-		emailService.sendCriationUserHtmlEmail(obj);
+		emailService.sendCriationUserEmail(obj);
 		return obj;
 	}
 
@@ -64,6 +69,10 @@ public class UsuarioService {
 				objDto.getIdade());
 
 		return usuario;
+	}
+
+	public Usuario fromDTO(UsuarioDTO objDto) {
+		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null, null);
 	}
 
 	private void updateData(Usuario newObj, Usuario obj) {
