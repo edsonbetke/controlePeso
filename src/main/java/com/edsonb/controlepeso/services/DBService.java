@@ -5,15 +5,20 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.edsonb.controlepeso.domain.Peso;
 import com.edsonb.controlepeso.domain.Usuario;
+import com.edsonb.controlepeso.domain.enums.Perfil;
 import com.edsonb.controlepeso.repositories.PesoRepository;
 import com.edsonb.controlepeso.repositories.UsuarioRepository;
 
 @Service
 public class DBService {
+
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	@Autowired
 	private PesoRepository pesoRepository;
@@ -24,8 +29,9 @@ public class DBService {
 	public void instantiateTestDatabase() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-		Usuario usuario1 = new Usuario(null, "Edson Borges", "edsonb@gmail.com", "123", 1.82, 35);
-		Usuario usuario2 = new Usuario(null, "Taynê Santana", "taynespc@gmail.com", "123", 1.68, 27);
+		Usuario usuario1 = new Usuario(null, "Edson Borges", "edsonb@gmail.com", pe.encode("123"), 1.82, 35);
+		Usuario usuario2 = new Usuario(null, "Taynê Santana", "taynespc@gmail.com", pe.encode("123"), 1.68, 27);
+		usuario2.addPerfil(Perfil.ADMIN);
 
 		Peso peso1 = new Peso(null, sdf.parse("30/09/2017 10:32"), 80.5, 20.0, 1.0, usuario1);
 		Peso peso2 = new Peso(null, sdf.parse("01/10/2017 10:32"), 79.3, 19.9, 0.99, usuario1);
