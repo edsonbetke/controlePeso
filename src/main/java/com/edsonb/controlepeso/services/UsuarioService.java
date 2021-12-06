@@ -13,9 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.edsonb.controlepeso.domain.Usuario;
+import com.edsonb.controlepeso.domain.enums.Perfil;
 import com.edsonb.controlepeso.dto.UsuarioDTO;
 import com.edsonb.controlepeso.dto.UsuarioNewDTO;
 import com.edsonb.controlepeso.repositories.UsuarioRepository;
+import com.edsonb.controlepeso.security.UserSS;
+import com.edsonb.controlepeso.services.exceptions.AuthorizationException;
 import com.edsonb.controlepeso.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -31,6 +34,11 @@ public class UsuarioService {
 	private EmailService emailService;
 
 	public Usuario find(Integer id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
+
 		Optional<Usuario> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado!! Id: " + id + ", Tipo: " + Usuario.class.getName()));
@@ -65,8 +73,8 @@ public class UsuarioService {
 	}
 
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
-		Usuario usuario = new Usuario(null, objDto.getNome(), objDto.getEmail(), objDto.getSenha(), objDto.getAltura(),
-				objDto.getIdade());
+		Usuario usuario = new Usuario(null, objDto.getNome(), objDto.getEmail(), pe.encode(objDto.getSenha()),
+				objDto.getAltura(), objDto.getIdade());
 
 		return usuario;
 	}
