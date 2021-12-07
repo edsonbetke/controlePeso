@@ -15,4 +15,6 @@ public interface EmailService {
 	void sendCriationUserHtmlEmail(Usuario obj);
 
 	void sendHtmlEmail(MimeMessage msg);
+
+	void sendNewPasswordEmail(Usuario usuario, String newPass);
 }
