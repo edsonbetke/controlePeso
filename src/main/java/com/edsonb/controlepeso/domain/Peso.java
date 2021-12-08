@@ -40,7 +40,7 @@ public class Peso implements Serializable {
 		this.id = id;
 		this.data = data;
 		this.peso = peso;
-		this.imc = imc;
+		this.imc = calculaImc(peso, usuario.getAltura());
 		this.variacao = variacao;
 		this.usuario = usuario;
 	}
@@ -116,6 +116,16 @@ public class Peso implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	private Double calculaImc(Double peso, Double altura) {
+//		DecimalFormat df = new DecimalFormat("0.00");
+//		df.setRoundingMode(RoundingMode.UNNECESSARY);
+		Double imc = 0.0;
+		if (altura > 0.0) {
+			imc = (peso / (altura * altura));
+		}
+		return imc;
 	}
 
 }

@@ -14,6 +14,8 @@ public class PesoDTO implements Serializable {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private Double peso;
 
+	private Double imc;
+
 	public PesoDTO() {
 
 	}
@@ -21,6 +23,7 @@ public class PesoDTO implements Serializable {
 	public PesoDTO(Peso obj) {
 		id = obj.getId();
 		peso = obj.getPeso();
+		imc = obj.getImc();
 	}
 
 	public Integer getId() {
@@ -37,6 +40,14 @@ public class PesoDTO implements Serializable {
 
 	public void setPeso(Double peso) {
 		this.peso = peso;
+	}
+
+	public Double getImc() {
+		return imc;
+	}
+
+	public void setImc(Double imc) {
+		this.imc = imc;
 	}
 
 }
